@@ -5,7 +5,7 @@ Summary(pl.UTF-8):	%{_modname} - wrapper biblioteki gpgme
 Name:		php-pecl-%{_modname}
 Version:	1.3.1
 Release:	2
-License:	PHP 2.02
+License:	BSD, revised
 Group:		Development/Languages/PHP
 Source0:	http://pecl.php.net/get/%{_modname}-%{version}.tgz
 # Source0-md5:	75881c633d7a53065d281e8a4a9a2cdf
