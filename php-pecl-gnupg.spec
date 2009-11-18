@@ -35,6 +35,7 @@ To rozszerzenie ma w PECL status: %{_status}.
 %setup -q -c
 
 %build
+CFLAGS="%{rpmcflags} -D_FILE_OFFSET_BITS=64" ; export CFLAGS
 cd %{_modname}-%{version}
 phpize
 %configure
