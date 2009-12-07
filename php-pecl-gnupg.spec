@@ -4,11 +4,12 @@ Summary:	%{_modname} - wrapper around the gpgme library
 Summary(pl.UTF-8):	%{_modname} - wrapper biblioteki gpgme
 Name:		php-pecl-%{_modname}
 Version:	1.3.1
-Release:	3
+Release:	4
 License:	BSD, revised
 Group:		Development/Languages/PHP
 Source0:	http://pecl.php.net/get/%{_modname}-%{version}.tgz
 # Source0-md5:	75881c633d7a53065d281e8a4a9a2cdf
+Patch0:		%{name}-gpgme12.patch
 URL:		http://pecl.php.net/package/gnupg/
 BuildRequires:	gpgme-devel
 BuildRequires:	php-devel >= 3:5.0.0
@@ -33,6 +34,7 @@ To rozszerzenie ma w PECL status: %{_status}.
 
 %prep
 %setup -q -c
+%patch0 -p0
 
 %build
 CFLAGS="%{rpmcflags} -D_FILE_OFFSET_BITS=64" ; export CFLAGS
