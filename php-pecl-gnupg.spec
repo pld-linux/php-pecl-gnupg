@@ -1,19 +1,20 @@
-%define		_modname	gnupg
-%define		_status		stable
-Summary:	%{_modname} - wrapper around the gpgme library
-Summary(pl.UTF-8):	%{_modname} - wrapper biblioteki gpgme
-Name:		php-pecl-%{_modname}
+%define		php_name	php%{?php_suffix}
+%define		modname	gnupg
+%define		status		stable
+Summary:	%{modname} - wrapper around the gpgme library
+Summary(pl.UTF-8):	%{modname} - wrapper biblioteki gpgme
+Name:		%{php_name}-pecl-%{modname}
 Version:	1.3.2
 Release:	3
 License:	BSD, revised
 Group:		Development/Languages/PHP
-Source0:	http://pecl.php.net/get/%{_modname}-%{version}.tgz
+Source0:	http://pecl.php.net/get/%{modname}-%{version}.tgz
 # Source0-md5:	b55e594024dfbf101bc1db77b27cab52
 URL:		http://pecl.php.net/package/gnupg/
+BuildRequires:	%{php_name}-devel >= 3:5.0.0
 BuildRequires:	gpgme-devel
-BuildRequires:	php-devel >= 3:5.0.0
 BuildRequires:	re2c
-BuildRequires:	rpmbuild(macros) >= 1.344
+BuildRequires:	rpmbuild(macros) >= 1.650
 %{?requires_php_extension}
 Requires:	gpgme >= 1.1.4-2
 Requires:	php(core) >= 5.0.4
@@ -23,20 +24,20 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 This extension provides methods to interact with gnupg. So you can
 sign, encrypt, verify directly from PHP.
 
-In PECL status of this extension is: %{_status}.
+In PECL status of this extension is: %{status}.
 
 %description -l pl.UTF-8
 To rozszerzenie dostarcza metody współpracy z gnupg. Umożliwia to
 podpisywanie, szyfrowanie oraz weryfikację danych z poziomu PHP.
 
-To rozszerzenie ma w PECL status: %{_status}.
+To rozszerzenie ma w PECL status: %{status}.
 
 %prep
-%setup -q -c
+%setup -qc
+mv %{modname}-%{version}/* .
 
 %build
-CFLAGS="%{rpmcflags} -D_FILE_OFFSET_BITS=64" ; export CFLAGS
-cd %{_modname}-%{version}
+export CFLAGS="%{rpmcflags} -D_FILE_OFFSET_BITS=64"
 phpize
 %configure
 %{__make}
@@ -45,10 +46,10 @@ phpize
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{php_sysconfdir}/conf.d,%{php_extensiondir}}
 
-install %{_modname}-%{version}/modules/%{_modname}.so $RPM_BUILD_ROOT%{php_extensiondir}
-cat <<'EOF' > $RPM_BUILD_ROOT%{php_sysconfdir}/conf.d/%{_modname}.ini
-; Enable %{_modname} extension module
-extension=%{_modname}.so
+install -p modules/%{modname}.so $RPM_BUILD_ROOT%{php_extensiondir}
+cat <<'EOF' > $RPM_BUILD_ROOT%{php_sysconfdir}/conf.d/%{modname}.ini
+; Enable %{modname} extension module
+extension=%{modname}.so
 EOF
 
 %clean
@@ -64,6 +65,6 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc %{_modname}-%{version}/{EXPERIMENTAL,README}
-%config(noreplace) %verify(not md5 mtime size) %{php_sysconfdir}/conf.d/%{_modname}.ini
-%attr(755,root,root) %{php_extensiondir}/%{_modname}.so
+%doc EXPERIMENTAL README
+%config(noreplace) %verify(not md5 mtime size) %{php_sysconfdir}/conf.d/%{modname}.ini
+%attr(755,root,root) %{php_extensiondir}/%{modname}.so
