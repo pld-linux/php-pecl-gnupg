@@ -4,12 +4,12 @@
 Summary:	%{modname} - wrapper around the gpgme library
 Summary(pl.UTF-8):	%{modname} - wrapper biblioteki gpgme
 Name:		%{php_name}-pecl-%{modname}
-Version:	1.3.2
-Release:	3
+Version:	1.3.3
+Release:	1
 License:	BSD, revised
 Group:		Development/Languages/PHP
 Source0:	http://pecl.php.net/get/%{modname}-%{version}.tgz
-# Source0-md5:	b55e594024dfbf101bc1db77b27cab52
+# Source0-md5:	00033067dbe0af126c838498a98886ea
 URL:		http://pecl.php.net/package/gnupg/
 BuildRequires:	%{php_name}-devel >= 3:5.0.0
 BuildRequires:	gpgme-devel
